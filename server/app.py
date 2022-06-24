@@ -2,6 +2,7 @@ from flask import Flask, redirect, render_template, request, session
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit, send, join_room, leave_room, close_room
 
+# app config stuff
 
 app = Flask(__name__, 
         static_folder="./dist/static",
@@ -13,6 +14,12 @@ app.config['DEBUG'] = True
 cors  = CORS(app, resources={r"/api/*": {"origin": "*"}})
 socketio = SocketIO(cors_allowed_origins="*", async_mode="eventlet")
 socketio.init_app(app)
+
+# test home route running
+
+@app.route('/',methods = ['GET','POST'])
+def home():
+    return "<h1>Server running...ig, idk</h1>"
 
 # socketio functions
 
