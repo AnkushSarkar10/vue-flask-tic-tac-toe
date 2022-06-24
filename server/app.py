@@ -101,7 +101,7 @@ def sendUserName(data):
 @socketio.on('board_changed')
 def board_changed(data):
     data_to_send = {"x":data["x"], "y":data["y"], "player":data["player"]}
-    emit("board_changed_in_server", data_to_send , to=data['roomId'])
+    emit("board_changed_in_server", data_to_send , to=data['roomId'], include_self=False)
 
 # switch the turn to the other person
 @socketio.on('switch_users')
