@@ -43,9 +43,19 @@ export default {
             })
 
             set_current_player_and_room_id.then((roomid) => {
-            // go to the game screen and display the roomId in the url
-                let gameurl = '/game/' + roomid;
-                this.$router.push(gameurl);
+                // go  to the waiting screen if only one in room
+                socket.on("waiting_for_opponent", () => {
+                    let url = '/waiting/' + roomid;
+                    this.$router.push(url);
+                })
+                // go to the game screen if both player in room
+                socket.on("match_found", () => {
+                    // send the username to the server
+                    socket.emit("sendUserName", {name: store.getters.playerUserName, roomid: store.getters.roomId});
+                    let url = '/game/' + roomid;
+                    this.$router.push(url);
+                })
+               
             }).catch((err) => {
                 console.log(err);
             })

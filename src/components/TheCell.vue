@@ -28,15 +28,21 @@
           let data = {roomId: store.getters.roomId , player: store.getters.currentPlayer, x: this.x, y: this.y};
           store.getters.socket.emit("board_changed", data);
           
-          // testing
-          if (store.getters.checkIfFull) {
-            console.log("full!");
-          }
-
+          // logic for checking if someone won,a nd telling the server the same
           if (store.getters.playerHas3InARow("X")) {
+            let data = {roomId: store.getters.roomId , player: "X"};
+            store.getters.socket.emit("someone_won", data);
             console.log("X won!");
           } else if (store.getters.playerHas3InARow("O")) {
+            let data = {roomId: store.getters.roomId , player: "O"};
+            store.getters.socket.emit("someone_won", data);
             console.log("O won!");
+          }
+
+          // if no one won and board full === game ended in a draw
+          if (store.getters.checkIfFull) {
+            console.log("Draw!");
+            store.getters.socket.emit("draw", {roomId: store.getters.roomId});
           }
         } 
       }

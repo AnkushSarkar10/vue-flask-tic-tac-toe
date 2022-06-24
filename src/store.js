@@ -11,18 +11,20 @@ const store = createStore({
             ],
             currentPlayer: "",
             playerUserName: "",
+            opponentUserName: "",
             roomId: "",
             myTurn: false,
+            gameOver: false,
             socket: io('ws://127.0.0.1:5000', {transports: ['websocket']})
         };
     },
     mutations: {
-        changeValue(state, payload) {
+        changeValue (state, payload) {
             if (state.board[payload.x][payload.y] == 0) {
                 state.board[payload.x][payload.y] = payload.player;
             }
         },
-        switchPlayer(state) {
+        switchPlayer (state) {
             if (state.currentPlayer == "O") {
                 state.currentPlayer = "X";
             } else {
@@ -42,6 +44,9 @@ const store = createStore({
         setUserName(state, givenName) {
             state.playerUserName = givenName;
         },
+        setOppUserName(state, givenName) {
+            state.opponentUserName = givenName;
+        },
         setCurrentPlayer(state, player) {
             state.currentPlayer = player
         },
@@ -50,6 +55,9 @@ const store = createStore({
         },
         setMyTurn(state, bool) {
             state.myTurn = bool;
+        },
+        setGameOver(state, bool) {
+            state.gameOver = bool;
         }
 
     },
@@ -89,13 +97,17 @@ const store = createStore({
             if (state.board[0][0] === player && state.board[1][1] === player && state.board[2][2] === player) {
                 return true;
             }
-            if (state.board[1][0] === player && state.board[1][1] === player && state.board[0][2] === player) {
+            if (state.board[2][0] === player && state.board[1][1] === player && state.board[0][2] === player) {
                 return true;
             }
             return false;
         },
+        // omg this is lokey stupid, do i really need to do this everytime? idk man people said use getters ama use getters
         playerUserName: (state) => {
             return state.playerUserName;
+        },
+        opponentUserName: (state) => {
+            return state.opponentUserName;
         },
         roomId: (state) => {
             return state.roomId;
@@ -105,6 +117,9 @@ const store = createStore({
         },
         currentPlayer: (state) => {
             return state.currentPlayer;
+        },
+        gameOver: (state) => {
+            return state.gameOver;
         }
     }
 });

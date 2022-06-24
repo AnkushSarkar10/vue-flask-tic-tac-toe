@@ -12,6 +12,11 @@
 
   <button class="btn btn-dark" @click=clearBoard()>Clear board</button>
   <h3>{{ $store.getters.playerUserName }}</h3>
+  <!-- show opponet name -->
+  <h3>We are playing -> {{ $store.getters.opponentUserName }}</h3>
+  <!-- showing who's move it is -->
+  <div class="yourTurn" v-if="$store.getters.myTurn">Its your turn</div>
+  <div class="oppTurn" v-else>Waiting for opponent to move</div>
 </template>
 <script>
   export default {

@@ -1,9 +1,7 @@
-from flask import Flask, redirect, render_template, request
+from flask import Flask, redirect, render_template, request, session
 from flask_cors import CORS
-from flask_socketio import SocketIO, emit, send, join_room, leave_room
-from numpy import broadcast
-from models import Game
-import requests
+from flask_socketio import SocketIO, emit, send, join_room, leave_room, close_room
+
 
 app = Flask(__name__, 
         static_folder="./dist/static",
@@ -11,23 +9,22 @@ app = Flask(__name__,
 app.config['SECRET_KEY'] = 'ballsdickballs'
 app.config['DEBUG'] = True
 
-cors  = CORS(app, resources={r"/api/*": {"origin": "*"}})
 
-socketio = SocketIO(app, cors_allowed_origins="*")
+cors  = CORS(app, resources={r"/api/*": {"origin": "*"}})
+socketio = SocketIO(cors_allowed_origins="*", async_mode="eventlet")
+socketio.init_app(app)
 
 # socketio functions
 
 @socketio.on('connect')
 def client_connect():
+    session["roomId"] = ""
     emit('on_connect', 'Connected') 
 
 @socketio.on('get_username')
 def get_username(userName):
     print(userName + ' : ' + request.sid)
 
-@socketio.on('disconnect')
-def client_disconect():
-    pass
 
 # room stuff 
 Rooms = {}
@@ -37,6 +34,22 @@ def printRooms():
     for i in Rooms:
         print(f'{i} - {Rooms[i]}')
     print("------------------------")
+
+def close_and_remove_rooms(id):
+    if (id in Rooms):
+        close_room(id)
+        Rooms.pop(id)
+        printRooms()
+
+# if User DC's
+@socketio.on('disconnect')
+def disconnect():
+    if session["roomId"] != "":
+        emit("game_over", "Oponent DC'ed :(", to=session["roomId"])
+        close_and_remove_rooms(session["roomId"])
+        print(session["roomId"] + " is the roomid of the dude who just dc'ed")
+    else:
+        print("rando DC'ed")
 
 @socketio.on('user_join_room')
 def user_join_room(data):
@@ -49,10 +62,12 @@ def user_join_room(data):
             join_room(i)
             Rooms[i] += 1
             # set player value to O and roomid in client
-            room_id_and_player = {"room_id": i, "player": "O"}
+            room_id_and_player = {"room_id": room_id, "player": "O"}
             emit("set_current_player_and_room_id", room_id_and_player)
-            send("match found", to=room_id)
+            session["roomId"] = room_id
+            emit("match_found", to=room_id)
             break
+
     # if no room with one member, create one with the given room id
     else:
         room_id = data['room_id']
@@ -60,11 +75,18 @@ def user_join_room(data):
         # set player value to X and roomid in client
         room_id_and_player = {"room_id": room_id, "player": "X"}
         emit("set_current_player_and_room_id", room_id_and_player)
+        session["roomId"] = room_id
+        emit("waiting_for_opponent", to=room_id)
         Rooms[room_id] = 1
 
     print(username + ' has entered the room - ' + room_id)
     send(username + ' has entered the room - ' + room_id, to=room_id)
     printRooms()
+
+# get opponent username
+@socketio.on('sendUserName')
+def sendUserName(data):
+    emit("setOppName", data["name"], to=data["roomid"], include_self=False)
 
 # game logic
 
@@ -79,11 +101,24 @@ def board_changed(data):
 def switch_users(room_id):
     emit('make_user_switch', to=room_id)
 
+
 # when one user wins
 @socketio.on('someone_won')
 def someone_won(data):
-    # data -> roomid, who won
-    pass
+    #data -> roomid, who won
+    message = data["player"] + " Won!"
+    emit("game_over", message, to=data["roomId"])
+    # close the room
+    close_and_remove_rooms(data["roomId"])
+
+    print("Player " + data["player"] + " won in room -> " + data["roomId"])
+
+# if the game is a draw
+@socketio.on('draw')
+def draw(data):
+    message = "Draw :("
+    emit("game_over", message, to=data["roomId"])
+    close_and_remove_rooms(data["roomId"])
 
 
 if __name__ == "__main__":

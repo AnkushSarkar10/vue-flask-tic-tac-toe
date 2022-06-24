@@ -2,6 +2,7 @@
   <h1>Epic Tic Tac Toe!</h1>
   <h3>({{ connStatus }})</h3>
   <router-view></router-view>
+  <win-loose-draw id="win-loose-draw" v-if="$store.getters.gameOver" :resultStr=resultStr></win-loose-draw>
 </template>
 
 <script>
@@ -9,11 +10,15 @@
 export default {
   data() {
     return {
-      connStatus: "DC'ed noob",  
+      connStatus: "DC'ed noob",
+      resultStr: ""
     }
   },
   methods: {
     
+  },
+  created() {
+
   },
   mounted() {
     // listening for server events
@@ -40,6 +45,17 @@ export default {
         store.commit('changeValue', {x: data["x"], y: data["y"], player: data["player"]});
       }
     })
+
+    // when game is over
+    store.getters.socket.on('game_over', (msg) => {
+      store.commit('setGameOver', true);
+      this.resultStr = msg;
+    })
+
+    // get and store opponent username
+    store.getters.socket.on('setOppName', (name) => {
+      store.commit('setOppUserName', name);
+    })
   }
 }
 </script>
@@ -55,4 +71,5 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+
 </style>
