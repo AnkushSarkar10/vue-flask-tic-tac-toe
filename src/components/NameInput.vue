@@ -3,7 +3,7 @@
         <div class="input-button">
             <input ref="name" :class="{ active: isActive }" @focus="isActive = true" @blur="(name.length == 0) ? isActive = false : isActive = isActive" type="text" v-model="name"/>
             <label>Gamer Name</label>
-            <button class="btn btn-dark" @click="setUserName()" :disabled='!validateName(name)'>Find Match</button>  
+            <button class="btn btn-dark" @click.once="setUserName()" :disabled='!validateName(name)'>Find Match</button>  
         </div>
     </div>
 </template>

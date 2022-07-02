@@ -1,6 +1,7 @@
 <template>
   <h3>Waiting for opponent . . .</h3>
-  <img src="https://media.giphy.com/media/Db7KR3SLgRUVfqKp0V/giphy.gif" />
+  <img src="@/assets/giphy.gif"/>
+  <!-- <img src="https://media.giphy.com/media/Db7KR3SLgRUVfqKp0V/giphy.gif" /> -->
 </template>
 
 <script>
