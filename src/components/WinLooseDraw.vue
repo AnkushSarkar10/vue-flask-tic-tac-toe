@@ -127,4 +127,16 @@ button:active {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
+
+@media screen and (max-device-width: 510px) {
+  .container {
+    transform: scale(0.5);
+    position: relative;
+    bottom: 45vh;
+    right: 5vh;
+  }
+  .modal-mask {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+}
 </style>
