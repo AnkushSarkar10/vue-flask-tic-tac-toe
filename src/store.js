@@ -15,10 +15,14 @@ const store = createStore({
             roomId: "",
             myTurn: false,
             gameOver: false,
-            socket: io('ws://127.0.0.1:5000', {transports: ['websocket']})
+            socket: io('https://tictactoe-server-flask.herokuapp.com/', {transports: ['websocket']}),
+            connectionStr: "server not connected"
         };
     },
     mutations: {
+        setConnStr (state, payload) {
+            state.connectionStr = payload;
+        },
         changeValue (state, payload) {
             if (state.board[payload.x][payload.y] == 0) {
                 state.board[payload.x][payload.y] = payload.player;

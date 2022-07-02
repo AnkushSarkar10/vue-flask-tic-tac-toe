@@ -1,8 +1,8 @@
 <template>
-  <h1>Epic Tic Tac Toe!</h1>
-  <h3>({{ connStatus }})</h3>
+  <div class="d-flex justify-content-center header"><the-header></the-header></div>
   <router-view></router-view>
   <win-loose-draw id="win-loose-draw" v-if="$store.getters.gameOver" :resultStr=resultStr></win-loose-draw>
+  <div class="connStat">{{ $store.state.connectionStr }}</div>
 </template>
 
 <script>
@@ -10,7 +10,7 @@
 export default {
   data() {
     return {
-      connStatus: "DC'ed noob",
+      // connStatus: "DC'ed noob",
       resultStr: ""
     }
   },
@@ -26,7 +26,8 @@ export default {
     document.title = 'Tic Tac Toe';
     // print any message event
     store.getters.socket.on('on_connect', (msg) => {
-      this.connStatus = msg;
+      // this.connStatus = msg;
+      store.commit('setConnStr', msg);
     });
     store.getters.socket.on('message', (msg) => {
       console.log(msg);
@@ -63,13 +64,33 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;500&display=swap');
 
+
+html, body {
+  height: 100%;
+  background: linear-gradient(#121212 , #212121);
+  color: white;
+  text-align: center;
+  overflow-x: hidden;
+}
+
 #app {
   font-family: 'Josefin Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 30px;
+  color: white;
+}
+
+.header {
+  padding-bottom: 5vh;
+}
+
+.connStat {
+  position: absolute;
+  bottom:0;
+  right:0;
+  font-size: 2vh;
 }
 
 </style>

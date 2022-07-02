@@ -7,7 +7,7 @@ import router from './router.js';
 
 import TheCell from './components/TheCell.vue'
 import WinLooseDraw from './components/WinLooseDraw.vue'
-
+import TheHeader from './components/TheHeader.vue'
 
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -19,6 +19,7 @@ const app = createApp(App);
 
 app.component("the-cell", TheCell);
 app.component("win-loose-draw", WinLooseDraw);
+app.component("the-header", TheHeader);
 
 
 app.use(store);

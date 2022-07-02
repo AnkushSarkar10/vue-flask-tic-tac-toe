@@ -1,33 +1,72 @@
 <template>
-    <div class="container">
-        <transition name="modal">
-            <div class="modal-mask">
-            <div class="modal-wrapper">
-                <div class="modal-container">
-
-                <div class="modal-header">
-                </div>
-
-                <div class="modal-body">
-                    {{ resultStr }}
-                </div>
-
-                <div class="modal-footer">
-                </div>
-                </div>
+  <div class="container">
+    <transition name="modal">
+      <div class="modal-mask">
+        <div class="modal-wrapper">
+          <div class="modal-container">
+            <div class="modal-body">
+              {{ resultStr }}
+              <hr>
+              <button class="btn" @click="newGame">New Game</button>
             </div>
-            </div>
-      </transition>
-    </div> 
+          </div>
+        </div>
+      </div>
+    </transition>
+  </div>
 </template>
 
 <script>
 export default {
-    props:["resultStr"]
-}
+  props: ["resultStr"],
+  methods: {
+    newGame() {
+      this.$store.state.gameOver = false;
+      this.$store.commit("clearBoard");
+      this.$router.replace("/");
+    }
+  }
+};
 </script>
 
 <style scoped>
+button {
+  /* background: #673AB7; */
+  position: relative;
+  bottom: 2vh;
+  color: white;
+  background-image: linear-gradient(to right, #673AB7, #1AB6C3, #673AB7);
+  background-size: 300% 100%;
+
+  moz-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  -webkit-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+}
+
+button:hover {
+    color: white;
+    background-position: 100% 0;
+    moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+button:disabled {
+  background-color:#673AB7;
+}
+
+
+button:focus,
+button:active {
+  outline:0 !important;
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* modal shit */
 .modal-mask {
   position: fixed;
   z-index: 9998;
@@ -48,27 +87,20 @@ export default {
 .modal-container {
   width: 500px;
   margin: 0px auto;
-  padding: 20px 30px;
-  background-color: #fff;
-  border-radius: 2px;
+  padding: 10px 30px 0px 30px;
+  background-color: #1F1F1F;
+  border-radius: 3px;
   transition: all 0.3s ease;
-  font-family: Helvetica, Arial, sans-serif;
   /* make modal bigger */
   transform: scale(1.2);
 }
 
-.modal-header h3 {
-  margin-top: 0;
-  color: #42b983;
-}
-
 .modal-body {
-  margin: 20px 0;
-  font-size:6em;
-}
-
-.modal-default-button {
-  float: right;
+  margin: 20px 0px 0px 0px;
+  padding-bottom: 0px;
+  padding-top: 0px;
+  font-size: 5em;
+  row-gap: 0px !important;
 }
 
 /*
@@ -93,5 +125,4 @@ export default {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
-
 </style>
