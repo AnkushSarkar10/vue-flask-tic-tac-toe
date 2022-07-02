@@ -26,7 +26,9 @@ export default {
     document.title = 'Tic Tac Toe';
     // print any message event
     store.getters.socket.on('on_connect', (msg) => {
-      // this.connStatus = msg;
+      store.commit('setConnStr', msg);
+    });
+    store.getters.socket.on('on_disconnect', (msg) => {
       store.commit('setConnStr', msg);
     });
     store.getters.socket.on('message', (msg) => {
@@ -84,6 +86,7 @@ html, body {
 
 .header {
   padding-bottom: 5vh;
+  margin-top: 8vh;
 }
 
 .connStat {
