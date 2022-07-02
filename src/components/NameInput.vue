@@ -16,6 +16,9 @@ export default {
       isActive: false,
     };
   },
+  created(){
+    // this.$router.go();
+  },
   watch :{
     name(value) {
       let len = 12;

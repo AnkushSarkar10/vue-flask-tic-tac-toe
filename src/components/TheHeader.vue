@@ -1,7 +1,6 @@
 <template>
   <div class="main-header">
     <h1>TIC TAC TOE</h1>
-    <!-- <h4>({{ $store.state.connectionStr }})</h4> -->
   </div>
 </template>
 

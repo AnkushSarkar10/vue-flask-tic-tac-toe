@@ -1,0 +1,5 @@
+{
+  "projects": {
+    "default": "vue-flask-tic-tac-toe"
+  }
+}

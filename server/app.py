@@ -51,7 +51,7 @@ def close_and_remove_rooms(id):
 # if User DC's
 @socketio.on('disconnect')
 def disconnect():
-    emit('on_disconnect', 'server not connected') 
+    emit('on_disconnect', 'server not connected')
     if session["roomId"] != "":
         emit("game_over", "Oponent DC'ed :(", to=session["roomId"])
         close_and_remove_rooms(session["roomId"])

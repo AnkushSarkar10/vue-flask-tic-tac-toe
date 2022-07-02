@@ -18,22 +18,26 @@ export default {
     
   },
   created() {
-
+    window.addEventListener('beforeunload', this.$router.replace("/"));
   },
   mounted() {
     // listening for server events
     let store = this.$store;
     document.title = 'Tic Tac Toe';
-    // print any message event
+    
     store.getters.socket.on('on_connect', (msg) => {
       store.commit('setConnStr', msg);
     });
     store.getters.socket.on('on_disconnect', (msg) => {
       store.commit('setConnStr', msg);
+      this.$router.replace("/");
     });
+
+    // print any message event
     store.getters.socket.on('message', (msg) => {
       console.log(msg);
     });
+
     // switch user when server says so
     store.getters.socket.on('make_user_switch', () => {
       let new_turn = store.getters.myTurn;

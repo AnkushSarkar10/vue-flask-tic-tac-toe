@@ -23,7 +23,9 @@ export default {
     newGame() {
       this.$store.state.gameOver = false;
       this.$store.commit("clearBoard");
+      this.$store.commit("setMyTurn", false);
       this.$router.replace("/");
+      window.location.reload();
     }
   }
 };

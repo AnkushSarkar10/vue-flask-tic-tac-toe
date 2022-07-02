@@ -63,7 +63,6 @@ const store = createStore({
         setGameOver(state, bool) {
             state.gameOver = bool;
         }
-
     },
     getters: {
         socket: (state) => {
