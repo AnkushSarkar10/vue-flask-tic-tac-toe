@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request, session
+from flask import Flask, request, session
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit, send, join_room, leave_room, close_room
 
