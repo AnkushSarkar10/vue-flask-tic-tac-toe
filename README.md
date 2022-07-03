@@ -1,24 +1,18 @@
-# vue-tic-tac-toe
+# Tic Tac Toe
 
-## Project setup
-```
-npm install
-```
+This is an online web based multiplayer Tic Tac Toe!
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+The [App](https://vue-flask-tic-tac-toe.web.app/)
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## Built With
 
-### Lints and fixes files
-```
-npm run lint
-```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Code
+
+
+## Contributers
+
+* Ankush Sarkar
+* Me
+* I
+* Myself
