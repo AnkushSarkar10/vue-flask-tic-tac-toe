@@ -55,8 +55,7 @@
           // change user locally
           store.commit('setMyTurn', false);
           // change the cell value locally
-          store.commit('changeValue', {x: this.x, y: this.y, player: store.getters.currentPlayer});   
-          
+          store.commit('changeValue', {x: this.x, y: this.y, player: store.getters.currentPlayer});
 
           // tell server to switch users in this room
           store.getters.socket.emit("switch_users", store.getters.roomId);
