@@ -10,7 +10,6 @@
 export default {
   data() {
     return {
-      // connStatus: "DC'ed noob",
       resultStr: ""
     }
   },
@@ -47,10 +46,27 @@ export default {
 
     // when server gets the update for change in board 
     store.getters.socket.on('board_changed_in_server', (data) => {
-      let board = store.getters.board;
-      if (board[data["x"]][data["y"]] != data["player"]){
+      // let board = store.getters.board;
+      // if (board[data["x"]][data["y"]] != data["player"]){
         store.commit('changeValue', {x: data["x"], y: data["y"], player: data["player"]});
-      }
+        //winning logic 
+        // logic for checking if someone won, and telling the server the same
+        if (store.getters.playerHas3InARow("X")) {
+          let data = {roomId: store.getters.roomId , player: "X"};
+          store.getters.socket.emit("someone_won", data);
+          console.log("X won!");
+        } else if (store.getters.playerHas3InARow("O")) {
+          let data = {roomId: store.getters.roomId , player: "O"};
+          store.getters.socket.emit("someone_won", data);
+          console.log("O won!");
+        }
+
+        // if no one won and board full === game ended in a draw
+        if (store.getters.checkIfFull) {
+          console.log("Draw!");
+          store.getters.socket.emit("draw", {roomId: store.getters.roomId});
+        }
+      // }
     })
 
     // when game is over

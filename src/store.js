@@ -15,7 +15,8 @@ const store = createStore({
             roomId: "",
             myTurn: false,
             gameOver: false,
-            socket: io('https://tictactoe-server-flask.herokuapp.com/', {transports: ['websocket']}),
+            socket: io('http://127.0.0.1:5000', {transports: ['websocket']}),
+            // socket: io('https://tictactoe-server-flask.herokuapp.com/', {transports: ['websocket']}),
             connectionStr: "server not connected"
         };
     },

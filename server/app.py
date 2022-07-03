@@ -102,12 +102,13 @@ def sendUserName(data):
 @socketio.on('board_changed')
 def board_changed(data):
     data_to_send = {"x":data["x"], "y":data["y"], "player":data["player"]}
-    emit("board_changed_in_server", data_to_send , to=data['roomId'], include_self=False)
+    # emit("board_changed_in_server", data_to_send , to=data['roomId'], include_self=False)
+    emit("board_changed_in_server", data_to_send , to=data['roomId'], include_self=True)
 
 # switch the turn to the other person
 @socketio.on('switch_users')
 def switch_users(room_id):
-    emit('make_user_switch', to=room_id)
+    emit('make_user_switch', to=room_id, include_self=True)
 
 
 # when one user wins
