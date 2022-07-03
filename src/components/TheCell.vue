@@ -53,8 +53,10 @@
         // if its our turn, then we do this shit
         if (store.state.board[this.x][this.y] == 0 && store.getters.myTurn) {
           // change the cell value locally
-          // store.commit('changeValue', {x: this.x, y: this.y, player: store.getters.currentPlayer});  
+          store.commit('changeValue', {x: this.x, y: this.y, player: store.getters.currentPlayer});  
+          // change user locally
           
+
           // tell server to switch users in this room
           store.getters.socket.emit("switch_users", store.getters.roomId);
 
