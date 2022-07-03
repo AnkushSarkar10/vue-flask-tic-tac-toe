@@ -1,5 +1,5 @@
 <template>
-    <div class="cell" @click.once=makeMove() :style="{'border-width':borderWidth}">
+    <div class="cell" @click=makeMove() :style="{'border-width':borderWidth}">
       <span v-if="$store.state.board[x][y] !== 0">{{ $store.state.board[x][y] }}</span>
     </div>
 </template>
@@ -52,14 +52,14 @@
         let store = this.$store;
         // if its our turn, then we do this shit
         if (store.state.board[this.x][this.y] == 0 && store.getters.myTurn) {
-          // change the cell value locally
-          store.commit('changeValue', {x: this.x, y: this.y, player: store.getters.currentPlayer});  
           // change user locally
+          store.commit('setMyTurn', !(store.getters.myTurn));
+          // change the cell value locally
+          store.commit('changeValue', {x: this.x, y: this.y, player: store.getters.currentPlayer});   
           
 
           // tell server to switch users in this room
           store.getters.socket.emit("switch_users", store.getters.roomId);
-
           // tell the server a change has been made to the x and y position of the board
           let data = {roomId: store.getters.roomId , player: store.getters.currentPlayer, x: this.x, y: this.y};
           store.getters.socket.emit("board_changed", data);
