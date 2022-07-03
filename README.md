@@ -4,7 +4,6 @@
 
 ## <div align="center">[The Game](https://vue-flask-tic-tac-toe.web.app/)</div>
 
-<br/>
 
 <img align="right" src="./public/icon.png" alt="drawing" width="120" height="120"/>
 
