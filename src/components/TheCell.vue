@@ -51,9 +51,9 @@
       makeMove() {
         let store = this.$store;
         // if its our turn, then we do this shit
-        if (store.state.board[this.x][this.y] == 0 && store.getters.myTurn) {
+        if (store.state.board[this.x][this.y] == 0 && store.state.myTurn) {
           // change user locally
-          store.commit('setMyTurn', !(store.getters.myTurn));
+          store.commit('setMyTurn', false);
           // change the cell value locally
           store.commit('changeValue', {x: this.x, y: this.y, player: store.getters.currentPlayer});   
           
