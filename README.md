@@ -2,8 +2,6 @@
 
 # This is an online web based multiplayer Tic Tac Toe
 
-<img align="right" src="./public/icon.png" alt="drawing" width="120" height="120"/>
-
 ## <div align="left">[The Game](https://vue-flask-tic-tac-toe.web.app/)</div>
 
 ## Live Demo
