@@ -8,7 +8,7 @@
 
 ## Video Demo
 
-[![Demo](https://img.youtube.com/vi/D4y1e6GeZhU/0.jpg)](https://www.youtube.com/watch?v=D4y1e6GeZhU)
+[![Demo](./vidthumdnail.png)](https://www.youtube.com/watch?v=D4y1e6GeZhU)
 
 <br/>
 
