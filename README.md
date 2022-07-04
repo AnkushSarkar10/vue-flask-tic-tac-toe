@@ -2,13 +2,13 @@
 
 # This is an online web based multiplayer Tic Tac Toe
 
-## <div align="left">[The Game](https://vue-flask-tic-tac-toe.web.app/)</div>
-
 <img align="right" src="./public/icon.png" alt="drawing" width="120" height="120"/>
 
-## Video Demo
+## <div align="left">[The Game](https://vue-flask-tic-tac-toe.web.app/)</div>
 
-[![Demo](./vidthumdnail.png)](https://www.youtube.com/watch?v=D4y1e6GeZhU)
+## Live Demo
+
+[![Demo](./vidthumdnail.png =100x100)](https://www.youtube.com/watch?v=D4y1e6GeZhU)
 
 <br/>
 
