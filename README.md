@@ -8,7 +8,9 @@
 
 ## Live Demo
 
-[![Demo](./vidthumdnail.png =100x100)](https://www.youtube.com/watch?v=D4y1e6GeZhU)
+<!-- [![Demo](./vidthumdnail.png)](https://www.youtube.com/watch?v=D4y1e6GeZhU) -->
+[![Demo]<img src="./vidthumdnail.png" alt="drawing" width="120" height="120"/>](https://www.youtube.com/watch?v=D4y1e6GeZhU)
+
 
 <br/>
 
