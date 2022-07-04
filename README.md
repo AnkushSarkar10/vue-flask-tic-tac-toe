@@ -10,8 +10,6 @@
 
 [![Demo](./vidthumdnail.png)](https://www.youtube.com/watch?v=D4y1e6GeZhU)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/D4y1e6GeZhU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 <br/>
 
 ## **Project setup on local machine**
