@@ -4,11 +4,11 @@
 
 ## <div align="center">[The Game](https://vue-flask-tic-tac-toe.web.app/)</div>
 
+<img align="right" src="./public/icon.png" alt="drawing" width="120" height="120"/>
+
 ## Video Demo
 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/D4y1e6GeZhU/0.jpg)](https://www.youtube.com/watch?v=D4y1e6GeZhU)
-
-<img align="right" src="./public/icon.png" alt="drawing" width="120" height="120"/>
 
 <br/>
 
