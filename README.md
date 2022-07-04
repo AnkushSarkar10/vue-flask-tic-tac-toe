@@ -1,6 +1,6 @@
 # Tic Tac Toe
 
-# This is an online web based multiplayer Tic Tac Toe
+### This is an online web based multiplayer Tic Tac Toe
 
 ## <div align="left">[The Game](https://vue-flask-tic-tac-toe.web.app/)</div>
 
