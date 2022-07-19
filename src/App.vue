@@ -3,6 +3,7 @@
   <router-view></router-view>
   <win-loose-draw id="win-loose-draw" v-if="$store.getters.gameOver" :resultStr=resultStr></win-loose-draw>
   <div class="connStat">{{ $store.state.connectionStr }}</div>
+  <a class="ghub" href="https://github.com/AnkushSarkar10/vue-flask-tic-tac-toe" target="_blank"><font-awesome-icon icon="fa-brands fa-github" /></a>
 </template>
 
 <script>
@@ -93,6 +94,19 @@ html, body {
   color: white;
   text-align: center;
   overflow-x: hidden;
+}
+
+.ghub {
+  font-size: 50px;
+  color: #F7F7F7;
+  position: fixed;
+  bottom: 0px;
+  left: 22px;
+}
+
+.ghub:hover {
+  transform: scale(1.1);
+  color: #F7F7F7;
 }
 
 #app {
