@@ -13,6 +13,7 @@ Jinja2==3.1.2
 MarkupSafe==2.1.1
 python-engineio==4.3.2
 python-socketio==5.6.0
+railway==0.0.4
 six==1.16.0
 Werkzeug==2.1.2
 zipp==3.8.0
