@@ -5,7 +5,8 @@ eventlet==0.30.2
 Flask==2.1.2
 Flask-Cors==3.0.10
 Flask-SocketIO==5.2.0
-greenlet==1.1.2
+gevent==22.10.2
+greenlet==2.0.1
 gunicorn==20.1.0
 importlib-metadata==4.11.4
 itsdangerous==2.1.2
@@ -17,3 +18,5 @@ railway==0.0.4
 six==1.16.0
 Werkzeug==2.1.2
 zipp==3.8.0
+zope.event==4.6
+zope.interface==5.5.2
