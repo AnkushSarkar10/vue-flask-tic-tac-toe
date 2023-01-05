@@ -51,7 +51,7 @@
 
 ## **Deployment**
 
-- The [Flask server](https://tictactoe-server-flask.herokuapp.com/) is hosted on heroku.
+- The [Flask server](https://tictactoe-server.onrender.com/) is hosted on render.
 - The [Vue App](https://vue-flask-tic-tac-toe.web.app/) is hosted on Firebase .
 
 <br/>
