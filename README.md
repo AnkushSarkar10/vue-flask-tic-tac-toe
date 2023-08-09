@@ -54,6 +54,11 @@
 - The [Flask server](https://tictactoe-server.onrender.com/) is hosted on render.
 - The [Vue App](https://vue-flask-tic-tac-toe.web.app/) is hosted on Firebase .
 
+### **Deployment steps**
+- `npm run build`
+- `firebase login` (if you are not logged in)
+- `firebase deploy`
+
 <br/>
 
 ## **Contributers**
