@@ -2,8 +2,12 @@
   <div class="d-flex justify-content-center header"><the-header></the-header></div>
   <router-view></router-view>
   <win-loose-draw id="win-loose-draw" v-if="$store.getters.gameOver" :resultStr=resultStr></win-loose-draw>
-  <div class="connStat">{{ $store.state.connectionStr }}</div>
-  <a class="ghub" href="https://github.com/AnkushSarkar10/vue-flask-tic-tac-toe" target="_blank"><font-awesome-icon icon="fa-brands fa-github" /></a>
+  <!-- <div class="connStat">{{ $store.state.connectionStr }}</div> -->
+
+  <connecting-to-server v-if="$store.state.connectionStr === 'server not connected'"/>
+
+  <a class="ghub" href="https://github.com/AnkushSarkar10/vue-flask-tic-tac-toe" target="_blank"><font-awesome-icon
+      icon="fa-brands fa-github" /></a>
 </template>
 
 <script>
@@ -15,7 +19,7 @@ export default {
     }
   },
   methods: {
-    
+
   },
   created() {
     window.addEventListener('beforeunload', this.$router.replace("/"));
@@ -24,7 +28,7 @@ export default {
     // listening for server events
     let store = this.$store;
     document.title = 'Tic Tac Toe';
-    
+
     store.getters.socket.on('on_connect', (msg) => {
       store.commit('setConnStr', msg);
     });
@@ -49,24 +53,24 @@ export default {
     store.getters.socket.on('board_changed_in_server', (data) => {
       // let board = store.getters.board;
       // if (board[data["x"]][data["y"]] != data["player"]){
-        store.commit('changeValue', {x: data["x"], y: data["y"], player: data["player"]});
-        //winning logic 
-        // logic for checking if someone won, and telling the server the same
-        if (store.getters.playerHas3InARow("X")) {
-          let data = {roomId: store.getters.roomId , player: "X"};
-          store.getters.socket.emit("someone_won", data);
-          console.log("X won!");
-        } else if (store.getters.playerHas3InARow("O")) {
-          let data = {roomId: store.getters.roomId , player: "O"};
-          store.getters.socket.emit("someone_won", data);
-          console.log("O won!");
-        }
+      store.commit('changeValue', { x: data["x"], y: data["y"], player: data["player"] });
+      //winning logic 
+      // logic for checking if someone won, and telling the server the same
+      if (store.getters.playerHas3InARow("X")) {
+        let data = { roomId: store.getters.roomId, player: "X" };
+        store.getters.socket.emit("someone_won", data);
+        console.log("X won!");
+      } else if (store.getters.playerHas3InARow("O")) {
+        let data = { roomId: store.getters.roomId, player: "O" };
+        store.getters.socket.emit("someone_won", data);
+        console.log("O won!");
+      }
 
-        // if no one won and board full === game ended in a draw
-        if (store.getters.checkIfFull) {
-          console.log("Draw!");
-          store.getters.socket.emit("draw", {roomId: store.getters.roomId});
-        }
+      // if no one won and board full === game ended in a draw
+      if (store.getters.checkIfFull) {
+        console.log("Draw!");
+        store.getters.socket.emit("draw", { roomId: store.getters.roomId });
+      }
       // }
     })
 
@@ -88,9 +92,10 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;500&display=swap');
 
 
-html, body {
+html,
+body {
   height: 100%;
-  background: linear-gradient(#121212 , #212121);
+  background: linear-gradient(#121212, #212121);
   color: white;
   text-align: center;
   overflow-x: hidden;
@@ -125,9 +130,8 @@ html, body {
 
 .connStat {
   position: absolute;
-  bottom:0;
-  right:0;
+  bottom: 0;
+  right: 0;
   font-size: 2vh;
 }
-
 </style>
